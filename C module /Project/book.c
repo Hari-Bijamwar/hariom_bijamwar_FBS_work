@@ -68,6 +68,10 @@ scanf("%d",&choice);
 	{
 	displayBookData(bookData,n);	
 	}
+	else
+	{
+		printf("Enter a valid choice\n");
+	}
 	printf("Enter 1 to continue 0 to exit\n");
 	scanf("%d",&flag);
 	
@@ -148,6 +152,7 @@ int getIndex(Book*bookData,int n,int tempBookId)
 			return i;
 		}
 	}
+	return -1;
 }
 void convertToLower(char*name)
 {
@@ -163,12 +168,20 @@ void removeBookData(Book*bookData,int *n)
 	printf("Enter the book id to delete the book\n");
 	scanf("%d",&tempBookId);
 	int index=getIndex(bookData, *n, tempBookId);
-	for(int i=index;i<*n-1;i++)
+	if(index!=-1)
+	{
+		for(int i=index;i<*n-1;i++)
 	{
 		bookData[i]=bookData[i+1];
 	}
 	(*n)--;
 	displayBookData(bookData,*n);
+	}
+	else
+	{
+		printf("Enter valid id\n");
+	}
+	
 }
 void viewOneBookData(Book*bookData,int index)
 {
@@ -197,7 +210,7 @@ void searchBook(Book*bookData,int n)
 		convertToLower(name);
 		for(int i=0;i<n;i++)
 		{
-		if(strcmp(name,bookData[i].bname)==0)
+		if(strstr(bookData[i].bname,name)!=NULL)
 		{
 			viewOneBookData(bookData,i);
 			break;
@@ -213,7 +226,7 @@ void searchBook(Book*bookData,int n)
 		convertToLower(authName);
 		for(int i=0;i<n;i++)
 		{
-		if(strcmp(authName,bookData[i].author)==0)
+		if(strstr(bookData[i].author,authName)!=NULL)
 		{
 			viewOneBookData(bookData,i);	
 		}	
@@ -244,6 +257,7 @@ Book* addNewBook(Book*bookData,int*n)
 	char tempBookName[200];
 	char authorName[100];
 	char tempCategory[100];
+	float tempRating;
 	(*n)++;
 	Book*temp=realloc(bookData,sizeof(Book)*(*n));
 	printf("Enter new book details\n");
@@ -270,12 +284,25 @@ Book* addNewBook(Book*bookData,int*n)
 	printf("Enter price of book\n");
 	scanf("%d",&bookData[(*n)-1].price);
 	printf("Enter rating of book\n");
-	scanf("%f",&bookData[(*n)-1].rating);
+//	scanf("%f",&bookData[(*n)-1].rating);
+    scanf("%f",&tempRating);
+    if(tempRating>=0 && tempRating<=5)
+    {
+    	bookData[(*n)-1].rating=tempRating;
+	}
+	else
+	{
+		printf("Enter a valid rating\n");
+		(*n)--;
+		return bookData;	
+	}
+	
 	printf("Enter book category\n");
 	fflush(stdin);
 	gets(tempCategory);
 	convertToLower(tempCategory);
 	strcpy(bookData[(*n)-1].category,tempCategory);
+	
 	return temp;
 }
 
@@ -285,6 +312,10 @@ void updateBookInfo(Book * bookData,int n)
 	printf("Enter id of book for which you want to make changes\n");
 	scanf("%d",&tempBookId);
 	int index=getIndex(bookData, n, tempBookId);
+	if(index!=-1)
+	{
+		
+	
 	printf("Enter 1 to update rating\nEnter 2 to update price\nEnter 3 to update both\n");
 	scanf("%d",&choice);
 	if(choice==1)
@@ -309,6 +340,11 @@ void updateBookInfo(Book * bookData,int n)
 		printf("Enter valid choice\n");
 	}
   displayBookData(bookData,n);
+  }
+  else
+  {
+  	printf("Enter valid id\n");
+  }
 }
 
 void sortBook(Book*bookData,int n)
@@ -378,6 +414,11 @@ void sortBook(Book*bookData,int n)
 				}
 			}
 		}
+	}
+	else
+	{
+		printf("Enter valid choice\n");
+		return;
 	}
 	displayBookData(bookData,n);
 }
