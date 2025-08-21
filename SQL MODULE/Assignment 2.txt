@@ -1,0 +1,487 @@
+1) Create the table Member, Books and Issue without any constraints as
+mentioned in the schema description above.
+
+=>
+
+create table memebers
+    -> (member_id int,member_name varchar(30),member_address varchar(50),acc_open_date date,membership_type varchar(20),fees_paid int,max_books_allowed int,penalty_amount decimal(7,2));
+describe members;
+
+
+create table books
+    -> (book_no int,book_name varchar(30),author_name varchar(30),cost decimal(7,2),category char(10));
+describe books;
+
+
+ create table issue
+    -> (lib_issue_id int,book_no int,member_id int,issue_date date,return_date date);
+describe issue;
+
+
+
+2) View the structure of the tables.
+
+o/p
+
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| member_id         | int          | YES  |     | NULL    |       |
+| member_name       | varchar(30)  | YES  |     | NULL    |       |
+| member_address    | varchar(50)  | YES  |     | NULL    |       |
+| acc_open_date     | date         | YES  |     | NULL    |       |
+| membership_type   | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid         | int          | YES  |     | NULL    |       |
+| max_books_allowed | int          | YES  |     | NULL    |       |
+| penalty_amount    | decimal(7,2) | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+
+o/p
+
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| book_no     | int          | YES  |     | NULL    |       |
+| book_name   | varchar(30)  | YES  |     | NULL    |       |
+| author_name | varchar(30)  | YES  |     | NULL    |       |
+| cost        | decimal(7,2) | YES  |     | NULL    |       |
+| category    | char(10)     | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+o/p
+
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| lib_issue_id | int  | YES  |     | NULL    |       |
+| book_no      | int  | YES  |     | NULL    |       |
+| member_id    | int  | YES  |     | NULL    |       |
+| issue_date   | date | YES  |     | NULL    |       |
+| return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+
+3) Drop the Member table
+
+=>
+drop table members;
+
+4) Create the table Member again as per the schema description with the
+following constraints.
+a. Member_Id – Primary Key
+b. Membership_type - ‘Lifetime’,’ Annual’, ‘Half Yearly’,’ Quarterly’
+
+=>
+
+create table members
+    -> (member_id int primary key,member_name varchar(30),member_address varchar(50),acc_open_date date,membership_type enum('lifetime','annual','half yearly','quarterly'),fees_paid int,max_books_allowed int,penalty_amount decimal(7,2));
+describe members;
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+| Field             | Type                                                | Null | Key | Default | Extra |
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+| member_id         | int                                                 | NO   | PRI | NULL    |       |
+| member_name       | varchar(30)                                         | YES  |     | NULL    |       |
+| member_address    | varchar(50)                                         | YES  |     | NULL    |       |
+| acc_open_date     | date                                                | YES  |     | NULL    |       |
+| membership_type   | enum('lifetime','annual','half yearly','quarterly') | YES  |     | NULL    |       |
+| fees_paid         | int                                                 | YES  |     | NULL    |       |
+| max_books_allowed | int                                                 | YES  |     | NULL    |       |
+| penalty_amount    | decimal(7,2)                                        | YES  |     | NULL    |       |
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+
+5) Modify the table Member increase the width of the member name to 30
+characters.
+
+=>
+
+ alter table members
+    -> modify column member_name char(30);
+ describe members;
+o/p
+
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+| Field             | Type                                                | Null | Key | Default | Extra |
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+| member_id         | int                                                 | NO   | PRI | NULL    |       |
+| member_name       | char(30)                                            | YES  |     | NULL    |       |
+| member_address    | varchar(50)                                         | YES  |     | NULL    |       |
+| acc_open_date     | date                                                | YES  |     | NULL    |       |
+| membership_type   | enum('lifetime','annual','half yearly','quarterly') | YES  |     | NULL    |       |
+| fees_paid         | int                                                 | YES  |     | NULL    |       |
+| max_books_allowed | int                                                 | YES  |     | NULL    |       |
+| penalty_amount    | decimal(7,2)                                        | YES  |     | NULL    |       |
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+
+6) Add a column named as Reference of Char(30) to Issue table.
+
+=>
+
+ alter table issue
+    -> add column reference char(30);
+ describe issue;
+
+o/p
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| lib_issue_id | int      | YES  |     | NULL    |       |
+| book_no      | int      | YES  |     | NULL    |       |
+| member_id    | int      | YES  |     | NULL    |       |
+| issue_date   | date     | YES  |     | NULL    |       |
+| return_date  | date     | YES  |     | NULL    |       |
+| reference    | char(30) | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+
+7) Delete/Drop the column Reference from Issue.
+
+=>
+
+ alter table issue
+    -> drop column reference;
+ describe issue;
+
+o/p
+
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| lib_issue_id | int  | YES  |     | NULL    |       |
+| book_no      | int  | YES  |     | NULL    |       |
+| member_id    | int  | YES  |     | NULL    |       |
+| issue_date   | date | YES  |     | NULL    |       |
+| return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+
+8) Rename the table Issue to Lib_Issue.
+
+=>
+
+ rename table issue to lib_issue;
+
+
+9) Insert following data in table Member
+
+=>
+
+insert into members (member_id,member_name,member_address,acc_open_date,membership_type,fees_paid,max_books_allowed,penalty_amount) values (1,"richa sharma","pune","2010-12-05","lifetime",25000,5,50),(2,"garima sen","pune",current_date,"annual",1000,3,null);
+select * from members;
+
+o/p
+
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | member_name  | member_address | acc_open_date | membership_type | fees_paid | max_books_allowed | penalty_amount |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | richa sharma | pune           | 2010-12-05    | lifetime        |     25000 |                 5 |          50.00 |
+|         2 | garima sen   | pune           | 2025-08-20    | annual          |      1000 |                 3 |           NULL |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+10) Insert at least 5 records with suitable data.
+
+=>
+
+insert into members (member_id,member_name,member_address,acc_open_date,membership_type,fees_paid,max_books_allowed,penalty_amount) values(3,"hari","nanded","2023-9-6","quarterly",10000,9,20),
+    -> (4,"soham","devgad","2022-6-9","half yearly",4000,2,800),
+    -> (5,"pranav","parbhani","2021-7-8","lifetime",18000,11,0),
+    -> (6,"sanket","pune","2011-5-16","annual",11000,2,98),
+    -> (7,"sumit","latur","2015-9-4","lifetime",45000,20,200);
+ select* from members;
+
+o/p
+
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | member_name  | member_address | acc_open_date | membership_type | fees_paid | max_books_allowed | penalty_amount |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | richa sharma | pune           | 2010-12-05    | lifetime        |     25000 |                 5 |          50.00 |
+|         2 | garima sen   | pune           | 2025-08-20    | annual          |      1000 |                 3 |           NULL |
+|         3 | hari         | nanded         | 2023-09-06    | quarterly       |     10000 |                 9 |          20.00 |
+|         4 | soham        | devgad         | 2022-06-09    | half yearly     |      4000 |                 2 |         800.00 |
+|         5 | pranav       | parbhani       | 2021-07-08    | lifetime        |     18000 |                11 |           0.00 |
+|         6 | sanket       | pune           | 2011-05-16    | annual          |     11000 |                 2 |          98.00 |
+|         7 | sumit        | latur          | 2015-09-04    | lifetime        |     45000 |                20 |         200.00 |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+11) Modify the column Member_name. Decrease the width of the member
+name to 20 characters. (If it does not allow state the reason for that)
+
+=>
+
+alter table members
+    -> modify column member_name char(20);
+ select*from members;
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | member_name  | member_address | acc_open_date | membership_type | fees_paid | max_books_allowed | penalty_amount |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | richa sharma | pune           | 2010-12-05    | lifetime        |     25000 |                 5 |          50.00 |
+|         2 | garima sen   | pune           | 2025-08-20    | annual          |      1000 |                 3 |           NULL |
+|         3 | hari         | nanded         | 2023-09-06    | quarterly       |     10000 |                 9 |          20.00 |
+|         4 | soham        | devgad         | 2022-06-09    | half yearly     |      4000 |                 2 |         800.00 |
+|         5 | pranav       | parbhani       | 2021-07-08    | lifetime        |     18000 |                11 |           0.00 |
+|         6 | sanket       | pune           | 2011-05-16    | annual          |     11000 |                 2 |          98.00 |
+|         7 | sumit        | latur          | 2015-09-04    | lifetime        |     45000 |                20 |         200.00 |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+12) Try to insert a record with Max_Books_Allowed = 110, Observe the
+error that comes.
+
+=>
+Field 'member_id' doesn't have a default value
+
+13) Generate another table named Member101 using a Create command
+along with a simple SQL query on member table.
+
+=> create table member101 as select* from members;
+select*from member101;
+
+o/p
+
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | member_name  | member_address | acc_open_date | membership_type | fees_paid | max_books_allowed | penalty_amount |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | richa sharma | pune           | 2010-12-05    | lifetime        |     25000 |                 5 |          50.00 |
+|         2 | garima sen   | pune           | 2025-08-20    | annual          |      1000 |                 3 |           NULL |
+|         3 | hari         | nanded         | 2023-09-06    | quarterly       |     10000 |                 9 |          20.00 |
+|         4 | soham        | devgad         | 2022-06-09    | half yearly     |      4000 |                 2 |         800.00 |
+|         5 | pranav       | parbhani       | 2021-07-08    | lifetime        |     18000 |                11 |           0.00 |
+|         6 | sanket       | pune           | 2011-05-16    | annual          |     11000 |                 2 |          98.00 |
+|         7 | sumit        | latur          | 2015-09-04    | lifetime        |     45000 |                20 |         200.00 |
+|        19 | vedant       | mumbai         | 2011-05-07    | lifetime        |     70000 |               110 |         120.00 |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+14) Add the constraints on columns max_books_allowed and penalty_amt
+as follows
+a. max_books_allowed < 100
+b. penalty_amt maximum 1000
+Also give names to the constraints.
+
+alter table members
+    -> modify column max_books_allowed int check(max_books_allowed<100);
+ alter table members
+    -> modify column penalty_amount int check(penalty_amount<1000);
+
+15) Drop the table books.
+
+=>
+
+ drop table books;
+
+16) Create table Books again as per the schema description with the
+following constraints.
+a. Book_No – Primary Key
+b. Book_Name – Not Null
+c. Category – System, Fiction, Database, RDBMS, Others.
+
+=>
+
+ create table books
+    -> (book_no int primary key,book_name varchar(30) not null,author_name varchar(30),cost decimal(7,2),category enum("system","fiction","database","rdbms","others"));
+
+17) Insert data in Book table as follows:
+
+=>
+
+ insert into books (book_no,book_name,author_name,cost,category) values
+    -> (101,"let us c","denis ritchie",450,"system"),
+    -> (102,"oracle-complete ref","loni",550,"database"),
+    -> (103,"mastering sql","loni",250,"database"),
+    -> (104,"pl sql-ref","scott urman",750,"database");
+select* from books;
+
+o/p
+
++---------+---------------------+---------------+--------+----------+
+| book_no | book_name           | author_name   | cost   | category |
++---------+---------------------+---------------+--------+----------+
+|     101 | let us c            | denis ritchie | 450.00 | system   |
+|     102 | oracle-complete ref | loni          | 550.00 | database |
+|     103 | mastering sql       | loni          | 250.00 | database |
+|     104 | pl sql-ref          | scott urman   | 750.00 | database |
++---------+---------------------+---------------+--------+----------+
+
+18) Insert more records in Book table.
+
+=>
+
+insert into books (book_no,book_name,author_name,cost,category) values
+    -> (105,"atomic habits","james clear",499,"fiction"),
+    -> (106,"wings of fire","a.p.j.abdul kalam",800,"fiction"),
+    -> (107,"politics","aristotle",900,"fiction");
+
+19) View the data in the tables using simple SQL query.
+
+=>
+
+select * from books;
+
+
++---------+---------------------+-------------------+--------+----------+
+| book_no | book_name           | author_name       | cost   | category |
++---------+---------------------+-------------------+--------+----------+
+|     101 | let us c            | denis ritchie     | 450.00 | system   |
+|     102 | oracle-complete ref | loni              | 550.00 | database |
+|     103 | mastering sql       | loni              | 250.00 | database |
+|     104 | pl sql-ref          | scott urman       | 750.00 | database |
+|     105 | atomic habits       | james clear       | 499.00 | fiction  |
+|     106 | wings of fire       | a.p.j.abdul kalam | 800.00 | fiction  |
+|     107 | politics            | aristotle         | 900.00 | fiction  |
++---------+---------------------+-------------------+--------+----------+
+
+20) Insert into Book following data.
+
+=>
+
+insert into books (book_no,book_name,author_name,cost,category) values
+    -> (108,"national geographic","adis scott",1000,"science");
+ERROR 1265 (01000): Data truncated for column 'category' at row 1
+mysql>
+
+21) Rename the table Lib_Issue to Issue.
+
+=>
+
+ rename table lib_issue to issue;
+
+22) Drop table Issue.
+
+=>
+
+drop table issue;
+
+23) As per the given structure Create table Issue again with following
+constraints.
+
+ Lib_Issue_Id-Primary key
+ Book_No- foreign key
+ Member_id - foreign key
+ Issue_date
+ Return_date
+
+=>
+
+ create table issue
+    -> (lib_issue_id int primary key,book_no int,member_id int,issue_date date,return_date date,foreign key(book_no) references books(book_no),foreign key (member_id) references members(member_id));
+
+24) Insert following data into Issue table.
+
+=>
+
+ insert into issue (lib_issue_id,book_no,member_id,issue_date) values
+    -> (7001,101,1,"2006-12-10"),
+    -> (7002,102,2,"2006-12-25"),
+    -> (7003,104,1,"2006-1-15"),
+    -> (7004,101,1,"2006-7-4"),
+    -> (7005,104,2,"2006-11-15"),
+    -> (7006,101,3,"2006-2-18");
+
+25) Remove the constraints on Issue table
+
+=>
+
+alter table issue
+    -> drop foreign key issue_ibfk_1;
+
+ alter table issue
+    -> drop foreign key issue_ibfk_2;
+
+
+26) Insert a record in Issue table. The member_id should not exist in
+
+member table.
+
+=>
+
+insert into issue (lib_issue_id,book_no,member_id,issue_date ,return_date ) values
+    -> (7007,101,2,'2009-11-8','2009-12-8');
+
+alter table members
+    -> drop column member_id;
+
+27) Now enable the constraints of Issue table. Observe the error
+
+=>
+
+alter table issue
+    -> add foreign key(book_no) references books(book_no),
+    -> add foreign key(member_id)references members(member_id);
+
+30) View the data and structure of all the three tables Member,
+
+Issue, Book.
+
+=>
+
+select*from members;
++--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_name  | member_address | acc_open_date | membership_type | fees_paid | max_books_allowed | penalty_amount |
++--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| richa sharma | pune           | 2010-12-05    | lifetime        |     25000 |                 5 |             50 |
+| garima sen   | pune           | 2025-08-20    | annual          |      1000 |                 3 |           NULL |
+| hari         | nanded         | 2023-09-06    | quarterly       |     10000 |                 9 |             20 |
+| soham        | devgad         | 2022-06-09    | half yearly     |      4000 |                 2 |            800 |
+| pranav       | parbhani       | 2021-07-08    | lifetime        |     18000 |                11 |              0 |
+| sanket       | pune           | 2011-05-16    | annual          |     11000 |                 2 |             98 |
+| sumit        | latur          | 2015-09-04    | lifetime        |     45000 |                20 |            200 |
++--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+ select*from issue;
++--------------+---------+-----------+------------+-------------+
+| lib_issue_id | book_no | member_id | issue_date | return_date |
++--------------+---------+-----------+------------+-------------+
+|         7001 |     101 |         1 | 2006-12-10 | NULL        |
+|         7002 |     102 |         2 | 2006-12-25 | NULL        |
+|         7003 |     104 |         1 | 2006-01-15 | NULL        |
+|         7004 |     101 |         1 | 2006-07-04 | NULL        |
+|         7005 |     104 |         2 | 2006-11-15 | NULL        |
+|         7006 |     101 |         3 | 2006-02-18 | NULL        |
+|         7007 |     101 |         2 | 2009-11-08 | 2009-12-08  |
++--------------+---------+-----------+------------+-------------+
+
+select*from books;
++---------+---------------------+-------------------+--------+----------+
+| book_no | book_name           | author_name       | cost   | category |
++---------+---------------------+-------------------+--------+----------+
+|     101 | let us c            | denis ritchie     | 450.00 | system   |
+|     102 | oracle-complete ref | loni              | 550.00 | database |
+|     103 | mastering sql       | loni              | 250.00 | database |
+|     104 | pl sql-ref          | scott urman       | 750.00 | database |
+|     105 | atomic habits       | james clear       | 499.00 | fiction  |
+|     106 | wings of fire       | a.p.j.abdul kalam | 800.00 | fiction  |
+|     107 | politics            | aristotle         | 900.00 | fiction  |
++---------+---------------------+-------------------+--------+----------+
+
+31) Modify the Return_Date of 7004,7005 to 15 days after the
+
+Issue_date.
+
+=>
+
+ update issue
+    -> set return_date=date_add(issue_date,interval 15 day)
+    -> where lib_issue_id in(7004,7005);
+
+32) Remove all the records from Issue table where member_ID is 1
+
+and Issue date in before 10-Dec-06.
+
+=>
+
+delete from issue where member_id=1 and issue_date<"2006-12-10";
+
+33) Remove all the records from Book table with category other
+
+than RDBMS and Database.
+
+=>
+
+ delete from books where category!="rdbms" && category!="database";
+
+34) Remove the table Member.
+
+=>
+
+ drop table members;
+
+
+35) Remove the table Book.
+
+=>
+
+drop table books;
