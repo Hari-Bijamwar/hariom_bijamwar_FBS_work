@@ -1,0 +1,129 @@
+1. Write a SQL statement to insert a record as follows:
+Employees :
+
+insert into employees values
+    -> (100,"steven","king","sking","515.123.4567","1987-06-17","ad_pres",24000,0,200,10),
+    -> (101,"neena","kochhar","nkochhar","515.123.4568","1987-06-18","ad_vp",17000,0,200,10),
+    -> (102,"lex","de haan","ldehaan","515.123.4569","1987-06-19","ad_vp",17000,0,200,10),
+    -> (103,"alexender","hunold","ahunold","590.423.4567","1987-06-20","it_prog",9000,0,103,60),
+    -> (104,"bruce","ernst","bernst","590.423.4568","1987-06-21","it_prog",6000,0,103,60),
+    -> (105,"david","austin","daustin","590.423.43569","1987-06-22","it_prog",4800,0,103,60),
+    -> (106,"valli","pataballa","vpatabal","590.423.4560","1987-06-23","it_prog",4800,0,103,60),
+    -> (107,"diana","lorentz","dlorentz","590.423.5567","1987-06-24","it_prog",4200,0,114,30),
+    -> (108,"nancy","greenberg","ngreemne","515.124.4569","1987-06-25","sa_man",12000,0,145,80),
+    -> (109,"daniel","faviet","dfaviet","515.124.4169","1987-06-26","sa_man",9000,0,145,80);
+
+o/p
+
++-------------+------------+-----------+----------+---------------+------------+---------+----------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email    | phone_number  | hire_date  | job_id  | salary   | comission | manager_id | department_id |
++-------------+------------+-----------+----------+---------------+------------+---------+----------+-----------+------------+---------------+
+|         100 | steven     | king      | sking    | 515.123.4567  | 1987-06-17 | ad_pres | 24000.00 |      0.00 |        200 |            10 |
+|         101 | neena      | kochhar   | nkochhar | 515.123.4568  | 1987-06-18 | ad_vp   | 17000.00 |      0.00 |        200 |            10 |
+|         102 | lex        | de haan   | ldehaan  | 515.123.4569  | 1987-06-19 | ad_vp   | 17000.00 |      0.00 |        200 |            10 |
+|         103 | alexender  | hunold    | ahunold  | 590.423.4567  | 1987-06-20 | it_prog |  9000.00 |      0.00 |        103 |            60 |
+|         104 | bruce      | ernst     | bernst   | 590.423.4568  | 1987-06-21 | it_prog |  6000.00 |      0.00 |        103 |            60 |
+|         105 | david      | austin    | daustin  | 590.423.43569 | 1987-06-22 | it_prog |  4800.00 |      0.00 |        103 |            60 |
+|         106 | valli      | pataballa | vpatabal | 590.423.4560  | 1987-06-23 | it_prog |  4800.00 |      0.00 |        103 |            60 |
+|         107 | diana      | lorentz   | dlorentz | 590.423.5567  | 1987-06-24 | it_prog |  4200.00 |      0.00 |        114 |            30 |
+|         108 | nancy      | greenberg | ngreemne | 515.124.4569  | 1987-06-25 | sa_man  | 12000.00 |      0.00 |        145 |            80 |
+|         109 | daniel     | faviet    | dfaviet  | 515.124.4169  | 1987-06-26 | sa_man  |  9000.00 |      0.00 |        145 |            80 |
++-------------+------------+-----------+----------+---------------+------------+---------+----------+-----------+------------+---------------+
+
+
+
+insert into department values
+    ->  (10,"administration",200,1700),
+    -> (20,"marketing",201,1800),
+    -> (30,"purchasing",114,1700),
+    -> (40,"human resources",203,2400),
+    -> (50,"shipping",121,1500),
+    -> (60,"it",103,1400),
+    -> (70,"public relations",204,2700),
+    -> (80,"sales",145,2500);
+
+o/p
+
++---------------+------------------+------------+-------------+
+| department_id | department_name  | manager_id | location_id |
++---------------+------------------+------------+-------------+
+|            10 | administration   |        200 |        1700 |
+|            20 | marketing        |        201 |        1800 |
+|            30 | purchasing       |        114 |        1700 |
+|            40 | human resources  |        203 |        2400 |
+|            50 | shipping         |        121 |        1500 |
+|            60 | it               |        103 |        1400 |
+|            70 | public relations |        204 |        2700 |
+|            80 | sales            |        145 |        2500 |
++---------------+------------------+------------+-------------+
+
+
+2. Write a SQL statement to insert 3 rows by a single insert statement.
+
+=>
+
+insert into department values
+    -> (90,"health",205,2800),
+    -> (100,"research",206,2900),
+    -> (110,"developement",207,3000);
+
+3. Write a SQL statement to insert one row in jobs table to ensure that no duplicate
+value will be entered in the job_id column.
+
+=>
+
+ALTER TABLE JOBS
+    -> MODIFY COLUMN JOB_ID VARCHAR(30) UNIQUE;
+ INSERT INTO JOBS VALUES
+    -> ("HA_HR","HUMAN RESOURCES",11000,20000);
+
+4. Write SQL statement to increment salary of each emp by 10%.
+
+=>
+
+ UPDATE EMPLOYEES
+    -> SET SALARY =SALARY*1.10;
+
+5. Write a SQL statement to change the email column of employees table with 'not
+available' for those employees whose department_id is 80 and gets a
+commission is less than .20%
+
+=>
+
+ UPDATE EMPLOYEES
+    -> SET EMAIL='NOT AVAILABLE' WHERE DEPARTMENT_ID=80 AND COMISSION<0.20;
+
+6. Write a SQL statement to change the email column of employees table with 'not
+available' for those employees who belongs to the 'Purchasing' department.
+
+=>
+
+update employees
+    -> set email='NOT AVAILABLE' WHERE DEPARTMENT="PURCHASING";
+
+
+7. Write a SQL statement to change the email and commission_pct column of
+employees table with 'not available' and 0.10 for all employees.
+
+=>
+
+ update employees
+    -> set email="NOT AVAILABLE",
+    -> COMISSION=0.10;
+
+O/P
+
++-------------+------------+-----------+---------------+---------------+------------+---------+----------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email         | phone_number  | hire_date  | job_id  | salary   | comission | manager_id | department_id |
++-------------+------------+-----------+---------------+---------------+------------+---------+----------+-----------+------------+---------------+
+|         100 | steven     | king      | NOT AVAILABLE | 515.123.4567  | 1987-06-17 | ad_pres | 26400.00 |      0.10 |        200 |            10 |
+|         101 | neena      | kochhar   | NOT AVAILABLE | 515.123.4568  | 1987-06-18 | ad_vp   | 18700.00 |      0.10 |        200 |            10 |
+|         102 | lex        | de haan   | NOT AVAILABLE | 515.123.4569  | 1987-06-19 | ad_vp   | 18700.00 |      0.10 |        200 |            10 |
+|         103 | alexender  | hunold    | NOT AVAILABLE | 590.423.4567  | 1987-06-20 | it_prog |  9900.00 |      0.10 |        103 |            60 |
+|         104 | bruce      | ernst     | NOT AVAILABLE | 590.423.4568  | 1987-06-21 | it_prog |  6600.00 |      0.10 |        103 |            60 |
+|         105 | david      | austin    | NOT AVAILABLE | 590.423.43569 | 1987-06-22 | it_prog |  5280.00 |      0.10 |        103 |            60 |
+|         106 | valli      | pataballa | NOT AVAILABLE | 590.423.4560  | 1987-06-23 | it_prog |  5280.00 |      0.10 |        103 |            60 |
+|         107 | diana      | lorentz   | NOT AVAILABLE | 590.423.5567  | 1987-06-24 | it_prog |  4620.00 |      0.10 |        114 |            30 |
+|         108 | nancy      | greenberg | NOT AVAILABLE | 515.124.4569  | 1987-06-25 | sa_man  | 13200.00 |      0.10 |        145 |            80 |
+|         109 | daniel     | faviet    | NOT AVAILABLE | 515.124.4169  | 1987-06-26 | sa_man  |  9900.00 |      0.10 |        145 |            80 |
++-------------+------------+-----------+---------------+---------------+------------+---------+----------+-----------+------------+---------------+
