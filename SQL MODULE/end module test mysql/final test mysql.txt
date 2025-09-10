@@ -22,7 +22,7 @@ order by cost desc limit 10;
 Q.3. 
 =>
 select * from employees
-order by desc limit 1,1;
+order by salary desc limit 1,1;
 
 Q.4.
 =>
@@ -42,7 +42,7 @@ select substring(phone_number,-4),substring(customerName,1,3) from customers;
 Q.7.
 =>
 select * from Products
-where product_name like(%Pro%);
+where product_name like'%Pro%';
 
 Q.8.
 =>
@@ -74,7 +74,7 @@ a.
 
 Q.14
 =>
-d.
+b.
 
 Q.15
 =>
