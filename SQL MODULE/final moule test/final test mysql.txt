@@ -1,0 +1,110 @@
+Name:Hariom Bijamwar
+Batch:java June offline batch
+set:B
+FRN:35
+
+
+
+
+
+Q.1. 
+=>
+select customerName from Customers 
+order by customerName;
+
+
+Q.2.
+=>
+select * from Products 
+order by cost desc limit 10;
+
+
+Q.3. 
+=>
+select * from employees
+order by desc limit 2,1;
+
+Q.4.
+=>
+select city, count(*) from Customers 
+group by city ;
+
+Q.5.
+=>
+select department,sum(salary)
+group by department having sum(salary)>200000;
+
+Q.6.
+=>
+select substring(phone_number,-4),substring(customerName,1,3) from customers;
+
+
+Q.7.
+=>
+select * from Products
+where product_name like(%Pro%);
+
+Q.8.
+=>
+select course , count(*) from Students 
+group by course having count(*)>30;
+
+Q.9.
+=>
+select month(order_date),count(*) from orders
+group by month(order_date);
+
+
+Q.10.
+=>
+select department, min(salary) as lowest_salary, max(salary) as highest_salary from employees group by department;
+
+
+Q.11.
+=>
+a.
+
+Q.12.
+=>
+a.
+
+Q.13.
+=>
+a.
+
+Q.14
+=>
+d.
+
+Q.15
+=>
+b.
+
+Q.16
+=>
+
+select c.customer_id,c.customer_name,avg(o.total_amount) as avg_order_value
+from customers c inner join orders o on c.customer_id=o.customer_id group by customer_id having count(o.order_id)>2;
+
+Q.17.
+=>
+
+select p.product_id,p.product_name,count(*) as sales_count from products p inner join sales s on p.product_id=s.product_id group by p.product_id having count(*)>50;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
